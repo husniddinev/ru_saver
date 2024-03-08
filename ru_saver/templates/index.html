@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>RU-SAVER - скачивай видео с YouTube</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        /* Custom styles */
+        body, html {
+            height: 100%;
+        }
+
+        body {
+            padding-top: 3rem;
+        }
+
+        .beautiful-h1 {
+            font-family: Helvetica, Arial, sans-serif;
+            font-size: 4rem;
+            background: -webkit-linear-gradient(left, #0abab5, #d41f4b);
+            background: -o-linear-gradient(right, #0abab5, #d41f4b);
+            background: -moz-linear-gradient(right, #0abab5, #d41f4b);
+            background: linear-gradient(to right, #0abab5, #d41f4b);
+            -webkit-background-clip: text;
+            -moz-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            -webkit-text-stroke: 2px transparent; /* Optional: Adds a stroke to the text */
+            animation: gradientAnimation 6s ease-in-out infinite;
+        }
+
+
+        /* Keyframes animation for gradient */
+        @keyframes gradientAnimation {
+            0% {
+                background-position: 0% 50%;
+            }
+            25% {
+                background-position: 100% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            75% {
+                background-position: 0% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        .download-button {
+            background-color: #0abab5;
+            border-color: #0abab5;
+        }
+
+        .download-button:hover {
+            background-color: #079693;
+            border-color: #079693;
+        }
+
+
+        /* Custom styling for dropdown menu */
+        .custom-select {
+            appearance: none;
+            -moz-appearance: none;
+            -webkit-appearance: none;
+            border-radius: 0;
+            padding-right: 2.5rem;
+            background-image: linear-gradient(45deg, transparent 50%, #0abab5 50%), linear-gradient(135deg, #0abab5 50%, transparent 50%);
+            background-position: calc(100% - 10px) calc(1em + 2px), calc(100% - 5px) calc(1em + 2px);
+            background-size: 5px 5px, 5px 5px;
+            background-repeat: no-repeat;
+        }
+
+        .custom-select:focus {
+            outline: none;
+            box-shadow: none;
+        }
+
+        .custom-select option {
+            padding: 0.5rem;
+        }
+
+        /* Keyframes animation for loading button */
+        @keyframes loadingAnimation {
+            0% {
+                background-color: #0abab5;
+                border-color: #0abab5;
+            }
+            50% {
+                background-color: #079693;
+                border-color: #079693;
+            }
+            100% {
+                background-color: #d41f4b; /* Red */
+                border-color: #d41f4b;
+            }
+        }
+
+        .loading-button {
+            animation: loadingAnimation 1s infinite ease-in-out;
+        }
+
+        .hide {
+            display: none;
+        }
+    </style>
+    <script>
+        window.addEventListener('load', function() {
+            var button = document.querySelector('.download-button');
+            var form = document.querySelector('form');
+
+            // Add the loading-button class upon form submission
+            form.addEventListener('submit', function(e) {
+                e.preventDefault(); // Prevent form submission
+
+                button.disabled = true;
+                button.classList.add('loading-button');
+                button.innerHTML = 'Загружается...';
+
+                // Simulate loading completion after a delay
+                setTimeout(function() {
+                    form.submit(); // Manually submit the form
+                    
+                    // Reset button state after form submission completes
+                    button.disabled = false;
+                    button.classList.remove('loading-button');
+                    button.innerHTML = 'Скачать';
+                }, 5); // Adjust delay time as necessary
+            });
+        });
+    </script>
+</head>
+<body>
+    <div class="container">
+        <div class="container">
+            <h1 class="text-center mb-5 beautiful-h1">RU-SAVER</h1>
+            <!-- Rest of your HTML code... -->
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <form action="/download" method="POST">
+                    <div class="form-group">
+                        <label for="url">Ссылка на YouTube видео:</label>
+                        <input type="text" class="form-control" id="url" name="url" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="quality">Качество видео:</label>
+                        <select class="custom-select" id="quality" name="quality">
+                            <option value="360p">360p</option>
+                            <option value="720p">720p</option>
+                        </select>
+                    </div>
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-primary download-button">Скачать</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <footer class="fixed-bottom text-center">
+        <div class="container py-3">
+            <p>HUSNIDDIN W.S., 2024, All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
